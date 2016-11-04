@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   nfs:
-    server: localhost
+    server: 192.168.1.66
     path: /home/data/pv0002
