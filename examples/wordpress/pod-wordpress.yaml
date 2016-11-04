@@ -18,7 +18,7 @@ spec:
         - name: WORDPRESS_DB_HOST
           # this is the name of the mysql service fronting the mysql pod in the same namespace
           # expands to mysql.<namespace>.svc.cluster.local  - where <namespace> is the current namespace
-          value: mysql
+          value: "name=mysql"
       ports: 
         - containerPort: 80
           name: wordpress
