@@ -19,8 +19,8 @@ mkdir -p /home/data/pv0002
 chmod -R 777 /home/data/
 
 # Add to /etc/exports
-/home/data/pv0001 *(rw,sync)
-/home/data/pv0002 *(rw,sync)
+/home/data/pv0001 *(rw,root_squash,no_wdelay)
+/home/data/pv0002 *(rw,root_squash,no_wdelay)
 
 # Enable the new exports without bouncing the NFS service
 exportfs -a
@@ -38,11 +38,17 @@ To enable writing in SELinux on each node:
 ```
 # -P makes the bool persistent between reboots.
 $ setsebool -P virt_use_nfs 1
+setsebool -P virt_sandbox_use_nfs 1
+```
+
+Update IPtables
+```
+iptables -I INPUT 1 -p tcp --dport 2049 -j ACCEPT
 ```
 
 ## NFS Persistent Volumes
 
-Each NFS export becomes its own Persistent Volume in the cluster.
+Each NFS export becomes its own Persistent Volume in the cluster. Before running the below commands edit the two .yaml files listed to have the proper hostname or ip address that the nfs mount is located at if deploying to a cluster.
 
 ```
 # Create the persistent volumes for NFS.
