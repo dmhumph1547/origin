@@ -4,11 +4,11 @@ metadata:
   name: pv0001
 spec:
   capacity:
-    storage: 1Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteOnce
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
   nfs:
-    server: localhost
+    server: 192.168.1.66
     path: /home/data/pv0001
